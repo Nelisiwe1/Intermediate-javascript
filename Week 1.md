@@ -127,3 +127,29 @@ A cookie with such attribute is only sent to a website if it’s opened directly
 The postMessage interface allows windows to talk to each other no matter which origin they are from.
 
 The window that wants to send a message calls postMessage method of the receiving window. In other words, if we want to send the message to win, we should call win.postMessage(data, targetOrigin).
+
+# ArrayBuffer
+The ArrayBuffer object is used to represent a generic raw binary data buffer.
+
+ To name a few classes:
+
+ArrayBuffer, Uint8Array, DataView, Blob, File, etc.
+
+Binary data in JavaScript is implemented in a non-standard way, compared to other languages. But when we sort things out, everything becomes fairly simple.
+
+To manipulate an ArrayBuffer, we need to use a “view” object.
+
+A view object does not store anything on its own. It’s the “eyeglasses” that give an interpretation of the bytes stored in the ArrayBuffer.
+
+For instance:
+
+**Uint8Array** – treats each byte in ArrayBuffer as a separate number, with possible values from 0 to 255 (a byte is 8-bit, so it can hold only that much). Such value is called a “8-bit unsigned integer”.
+
+**Uint16Array** – treats every 2 bytes as an integer, with possible values from 0 to 65535. That’s called a “16-bit unsigned integer”.
+
+**Uint32Array** – treats every 4 bytes as an integer, with possible values from 0 to 4294967295. That’s called a “32-bit unsigned integer”.
+
+**Float64Array** – treats every 8 bytes as a floating point number with possible values from 5.0x10-324 to 1.8x10308.
+
+## Type array
+A typed array in computer programming refers to an array-like data structure that stores elements of a single data type. Unlike regular JavaScript arrays, which can store elements of different data types, typed arrays are designed to store elements of a specific type, such as integers or floating-point numbers, in a more memory-efficient and predictable manner. 
