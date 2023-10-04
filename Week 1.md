@@ -84,6 +84,44 @@ Allows to run scripts from the iframe.
 Allows to window.open popups from the iframe
 
 
+# Clickjacking Attack
+The “clickjacking” attack allows an evil page to click on a “victim site” on behalf of the visitor.
+
+## Old-school defences (weak)
+The oldest defence is a bit of JavaScript which forbids opening the page in a frame (so-called “framebusting”).
+
+## Blocking top navigation
+We can block the transition caused by changing top.location in beforeunload event handler.
+
+Example:
+
+window.onbeforeunload = function() {
+
+  return false;
+
+};
+
+## sandbox attribute
+One of the things restricted by the sandbox attribute is navigation. A sandboxed iframe may not change top.location.
+
+Example:
+`<iframe sandbox="allow-scripts allow-forms" src="facebook.html"></iframe>`
+
+## X-Frame-options
+The server-side header X-Frame-Options can permit or forbid displaying the page inside a frame.
+
+It must be sent exactly as HTTP-header: the browser will ignore it if found in HTML `<meta>` tag. So, <meta http-equiv="X-Frame-Options"...> won’t do anything.
+
+The header may have 3 values:
+
+ Deny, sameorigin, Allow-from domain
+
+ ## Samesite cookie attribute
+The samesite cookie attribute can also prevent clickjacking attacks.
+
+A cookie with such attribute is only sent to a website if it’s opened directly, not via a frame, or otherwise
+
+
 ## Cross window messaging 
 
 The postMessage interface allows windows to talk to each other no matter which origin they are from.
